@@ -184,7 +184,7 @@ class Node {
         
         public String toString(){
             
-           return name + " " + entry;
+           return entry;
             
         }
 
