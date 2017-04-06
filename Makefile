@@ -10,6 +10,12 @@ SRC = ./src/
 
 DOC = ./doc/
 
+DOCFILES = ./src/BinarySearchTree.java ./src/PrintIt.java ./src/SearchIt.java ./src/SearchItLinear.java
+
+TEST = ./test/
+
+TESTFILES = 
+
 JAVAFLAGS = -g -d $(BIN) -cp $(SRC)
 
 COMPILE = $(JAVAC) $(JAVAFLAGS)
@@ -24,7 +30,10 @@ $(BIN)%.class : $(SRC)%.java
 	$(COMPILE) $<
 
 doc: $(BIN)
-	javadoc -d $(DOC) ./src/*  
+	javadoc -d $(DOC) $(DOCFILES)  
+
+test: $(TEST)
+	javac 
 
 clean : 
 	rm -rf $(BIN)*.class $(DOC)* 
