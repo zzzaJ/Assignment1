@@ -64,7 +64,7 @@ public class SearchIt {
                 }
                 else{
                     
-                    System.out.println("Not found"); // printing not found to show that the query was not found in the entries
+                    System.out.println("Not found"); // printing not found to show that the query was not found in the Binary Search Tree
                     
                 }
             }

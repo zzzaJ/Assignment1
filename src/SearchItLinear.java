@@ -64,6 +64,11 @@ public class SearchItLinear {
                         System.out.println(arr[i]);
                         
                     }
+                    else{
+                        
+                        System.out.println("Not found"); // printing not found to show that the query was not found in the array
+                        
+                    }
                     
                 }     
             }

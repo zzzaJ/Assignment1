@@ -57,7 +57,7 @@ public class TestBinarySearchTree {
        bst4.addNode("bTestName", "bTestEntry");
        bst4.addNode("cTestName", "cTestEntry"); 
        bst4.inOrderTraverseTree(bst4.root);
-        assertEquals("aTestEntry\nbTestEntry\ncTestEntry", this);
+       assertEquals("aTestEntry\nbTestEntry\ncTestEntry", outContent.toString());
        
     }
     

@@ -25,7 +25,7 @@ public class TestPrintIt {
     
     @Test public void testSearchIt(){ //Test to determine if PrintIt works correctly 
                                       //NB this is only one test but contains tests which will pick out errors in .print()
-        SearchIt.search();
+        PrintIt.print(); 
         assertEquals("aaddress|atelephone|aname\n"
                    + "baddress|btelephone|bname\n"
                    + "caddress|ctelephone|cname\n"
