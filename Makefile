@@ -1,39 +1,31 @@
-# Makefile for Assignment 1
-
-JAVAC = javac 
-
-JAVADOC = javadoc
-
 BIN = ./bin/
-
 SRC = ./src/
-
+TEST = ./test/
 DOC = ./doc/
+JAVAC = javac
+JAVAFILES = ./src/PrintIt.java ./src/SearchIt.java ./src/SearchItLinear.java ./src/BinarySearchTree.java
+JFLAGS = -g -d $(BIN) -cp $(SRC)
 
 DOCFILES = ./src/BinarySearchTree.java ./src/PrintIt.java ./src/SearchIt.java ./src/SearchItLinear.java
 
-TEST = ./test/
+JUNIT =./src/junit-4.12.jar:./src/hamcrest-core-1.3.jar
 
-TESTFILES = 
+vpath %.java ./src/
 
-JAVAFLAGS = -g -d $(BIN) -cp $(SRC)
+vpath %.class $(BIN):$(TEST)
 
-COMPILE = $(JAVAC) $(JAVAFLAGS)
+.SUFFIXES: .java .class
 
-JAVA_FILES = $(subst $(SRC), $(EMPTY), $(wildcard $(SRC)*.java))
+$(TEST)Test%.class : $(SRC)Test%.java
+	$(JAVAC) -g -d $(TEST) -cp $(SRC):$(JUNIT) $<
 
-CLASS_FILES = $(JAVA_FILES:.java=.class)
+.java.class:
+	$(JAVAC) $(JFLAGS):$(JUNIT) $<
 
-all : $(addprefix $(BIN), $(CLASS_FILES)) doc
-
-$(BIN)%.class : $(SRC)%.java
-	$(COMPILE) $<
-
+all: PrintIt.class SearchIt.class SearchItLinear.class TestBinarySearchTree.class TestPrintIt.class TestSearchIt.class TestSearchItLinear.class mvtest doc 
+#managed to achieve test*.class to test fldr, but using mv command only
 doc: $(BIN)
 	javadoc -d $(DOC) $(DOCFILES)  
 
-test: $(TEST)
-	javac 
-
-clean : 
-	rm -rf $(BIN)*.class $(DOC)* 
+mvtest: $(TEST)
+	mv ./bin/Test*.class ./test/
