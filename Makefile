@@ -1,31 +1,38 @@
-BIN = ./bin/
-SRC = ./src/
-TEST = ./test/
-DOC = ./doc/
+BIN = bin
+SRC = src
+TEST = test
+DOC = doc
+
 JAVAC = javac
-JAVAFILES = ./src/PrintIt.java ./src/SearchIt.java ./src/SearchItLinear.java ./src/BinarySearchTree.java
-JFLAGS = -g -d $(BIN) -cp $(SRC)
+JFLAGS = -g -d $(BIN) -cp $(BIN):$(JUNIT)
 
 DOCFILES = ./src/BinarySearchTree.java ./src/PrintIt.java ./src/SearchIt.java ./src/SearchItLinear.java
 
-JUNIT =./src/junit-4.12.jar:./src/hamcrest-core-1.3.jar
+JUNIT =/home/dino/cs2001f/JUnit/junit-4.12.jar:/home/dino/cs2001f/JUnit/hamcrest-core-1.3.jar
 
-vpath %.java ./src/
+vpath %.java $(SRC):$(TEST)
 
-vpath %.class $(BIN):$(TEST)
+vpath %.class $(BIN)
 
 .SUFFIXES: .java .class
 
-$(TEST)Test%.class : $(SRC)Test%.java
-	$(JAVAC) -g -d $(TEST) -cp $(SRC):$(JUNIT) $<
-
 .java.class:
-	$(JAVAC) $(JFLAGS):$(JUNIT) $<
+	$(JAVAC) $(JFLAGS) $<
 
-all: PrintIt.class SearchIt.class SearchItLinear.class TestBinarySearchTree.class TestPrintIt.class TestSearchIt.class TestSearchItLinear.class mvtest doc 
-#managed to achieve test*.class to test fldr, but using mv command only
+CLASSES = BinarySearchTree.class PrintIt.class SearchIt.class \
+	  SearchItLinear.class
+
+classes: $(CLASSES:.java=.class)
+
+test_class: classes TestBinarySearchTree.class \
+            TestPrintIt.class \
+	    TestSearchItLinear.class TestSearchIt.class
+
+test: test_class
+	java -ea -cp $(BIN):$(JUNIT)\ org.junit.runner.JUnitCore TestBinarySearchTree TestPrintIt TestSearchIt TestSearchItLinear
+
 doc: $(BIN)
 	javadoc -d $(DOC) $(DOCFILES)  
 
-mvtest: $(TEST)
-	mv ./bin/Test*.class ./test/
+clean:
+	rm -rf $(BIN)/*.class $(DOC)/* $(TEST)/*.class
