@@ -27,7 +27,7 @@ public class PrintIt {
                 
             }
             
-            
+           scanf.close(); 
         }
         catch (Exception ex) {
             

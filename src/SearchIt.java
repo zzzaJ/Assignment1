@@ -27,7 +27,7 @@ public class SearchIt {
                 
             }
             
-            
+           scanf.close(); 
         }
         catch (Exception ex) {
             

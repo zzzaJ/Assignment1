@@ -30,7 +30,7 @@ public class SearchItLinear {
                                 
             }
             
-            
+           scanf.close(); 
         }
         catch (Exception ex) {
             
@@ -38,7 +38,7 @@ public class SearchItLinear {
             
         }
         
-        return arr;
+	return arr;
             
     }
     /** 

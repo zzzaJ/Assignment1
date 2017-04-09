@@ -51,7 +51,7 @@ public class TestBinarySearchTree {
         
     }
     
-    @Test public void testInOrderPrint(){
+    @Test public void testInOrderPrint(){ //Test to determine if inOrder traversal is working as expected
         
        bst4.addNode("aTestName", "aTestEntry");
        bst4.addNode("bTestName", "bTestEntry");
