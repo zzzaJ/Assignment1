@@ -48,7 +48,7 @@ public class SearchItLinear {
     public static void search(){
     
         String[] arr = loadData(); // calling above method to obtain testdata entries in an array
-        
+        boolean found = false;
         try{
             
             Scanner scanf = new Scanner(new File("queries.txt"));
@@ -62,15 +62,18 @@ public class SearchItLinear {
                     if(line.equals(arr[i].substring(arr[i].lastIndexOf("|")+1))){ //using substring to obtain just the name from each array entry and comparing to the queries
                         
                         System.out.println(arr[i]);
+                        found = true;
                         
                     }
-                    else{
+                }
+                 
+                if(found == false){
                         
                         System.out.println("Not found"); // printing not found to show that the query was not found in the array
                         
                     }
-                    
-                }     
+                
+                     
             }
             
             
