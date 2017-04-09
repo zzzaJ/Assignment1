@@ -3,6 +3,8 @@ SRC = src
 TEST = test
 DOC = doc
 
+TESTING = /home/dino/cs2001f/Assignment1/HandIn/test/
+
 JAVAC = javac
 JFLAGS = -g -d $(BIN) -cp $(BIN):$(JUNIT)
 
@@ -24,12 +26,15 @@ CLASSES = BinarySearchTree.class PrintIt.class SearchIt.class \
 
 classes: $(CLASSES:.java=.class)
 
+#The following creates the .class files for the tests and moves them to \test\. so that the tests can run with pre-specified testdata and queries files, in order to test functionality.
+
 test_class: classes TestBinarySearchTree.class \
             TestPrintIt.class \
 	    TestSearchItLinear.class TestSearchIt.class
+	mv ./bin/Test*.class ./test/
 
 test: test_class
-	java -ea -cp $(BIN):$(JUNIT)\ org.junit.runner.JUnitCore TestBinarySearchTree TestPrintIt TestSearchIt TestSearchItLinear
+	java -cp $(TESTING):$(BIN):$(JUNIT) org.junit.runner.JUnitCore TestBinarySearchTree TestPrintIt TestSearchIt TestSearchItLinear
 
 doc: $(BIN)
 	javadoc -d $(DOC) $(DOCFILES)  
